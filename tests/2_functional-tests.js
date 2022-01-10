@@ -59,7 +59,7 @@ suite('Functional Tests', () => {
 			.send({ text: "", locale: "american-to-british" })
 			.end(function(err, res) {
 				assert.equal(res.status, 200)
-				assert.equal(res.body.error, 'No text to translate' )
+				assert.equal(res.body.error, 'No text to translate')
 				done()
 			})
 	})
@@ -70,7 +70,7 @@ suite('Functional Tests', () => {
 			.send({ text: "hello", locale: "american-to-british" })
 			.end(function(err, res) {
 				assert.equal(res.status, 200)
-				assert.equal(res.body.translation, 'Everything looks good to me!' )
+				assert.equal(res.body.translation, 'Everything looks good to me!')
 				done()
 			})
 	})

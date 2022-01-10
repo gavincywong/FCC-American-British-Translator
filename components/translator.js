@@ -39,17 +39,6 @@ class Translator {
 			var re = new RegExp("\\b" + (key) + "\\b", "i")
 			if (text.match(re)) {
 				replaceDict[key] = value;
-				//textHighlight = text.replace(re, `<span class="highlight">${value}</span>`)
-				//text = text.replace(re, value)
-			}
-		}
-
-		for (const [key, value] of Object.entries({ ...this.swap(americanToBritishTitles) })) {
-			var re = new RegExp("\\b" + key + "\\b", "i")
-			if (text.match(re)) {
-				//replaceDict[key] = value;
-				textHighlight = text.replace(re, `<span class="highlight">${this.capitalize(value)}</span>`)
-				text = text.replace(re, this.capitalize(value))
 			}
 		}
 
@@ -59,8 +48,13 @@ class Translator {
 			text = text.replace(re, value)
 		}
 
-		console.log(replaceDict)
-
+		for (const [key, value] of Object.entries({ ...this.swap(americanToBritishTitles) })) {
+			var re = new RegExp("\\b" + key + "\\b", "i")
+			if (text.match(re)) {
+				textHighlight = text.replace(re, `<span class="highlight">${this.capitalize(value)}</span>`)
+				text = text.replace(re, this.capitalize(value))
+			}
+		}
 		return [text, textHighlight];
 	}
 
@@ -85,16 +79,6 @@ class Translator {
 			var re = new RegExp("\\b" + key + "\\b", "i")
 			if (text.match(re)) {
 				replaceDict[key] = value;
-				//textHighlight = text.replace(key, `<span class="highlight">${value}</span>`)
-				//text = text.replace(key, value)
-			}
-		}
-
-		for (const [key, value] of Object.entries({ ...americanToBritishTitles })) {
-			var re = new RegExp(key, "i")
-			if (text.match(re)) {
-				textHighlight = text.replace(re, `<span class="highlight">${this.capitalize(value)}</span>`)
-				text = text.replace(re, this.capitalize(value))
 			}
 		}
 
@@ -104,9 +88,15 @@ class Translator {
 			text = text.replace(re, value)
 		}
 
+		for (const [key, value] of Object.entries({ ...americanToBritishTitles })) {
+			var re = new RegExp(key, "i")
+			if (text.match(re)) {
+				textHighlight = text.replace(re, `<span class="highlight">${this.capitalize(value)}</span>`)
+				text = text.replace(re, this.capitalize(value))
+			}
+		}
 		return [text, textHighlight];
 	}
-
 }
 
 module.exports = Translator;
